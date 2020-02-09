@@ -14,8 +14,8 @@ contract("TestRelayedOwnedSet", accounts => {
   const relaySet = async () => {
     if (_relaySet === undefined) {
       _relaySet = await TestRelaySet.new(SYSTEM);
-      const aaa = (await relayedOwnedSet()).address;
-      await _relaySet.setRelayed(aaa);
+      const contractAddress = (await relayedOwnedSet()).address;
+      await _relaySet.setRelayed(contractAddress);
     }
 
     return _relaySet;
@@ -387,7 +387,6 @@ contract("TestRelayedOwnedSet", accounts => {
   it("should allow only the relayedOwned contract to call `initiateChange`", async () => {
     const relayedOwnedSetAddress = (await relayedOwnedSet()).address;
     const relay = await relaySet();
-    const kkk = await relay.relayedSet();
     // only the relayedOwned set can initiate changes
     await assertThrowsAsync(
       () =>

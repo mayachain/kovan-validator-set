@@ -285,7 +285,7 @@ contract("TestOwnedSet", accounts => {
     const set = await ownedSet();
 
     await set.setRecentBlocks(20, { from: OWNER });
-    let blockNumber = await web3.eth.getBlockNumber();
+    const blockNumber = await web3.eth.getBlockNumber();
     // exists in `pendingStatus` with `isIn` set to false
     await assertThrowsAsync(
       () => set.reportBenign(accounts[3], blockNumber, { from: OWNER }),
